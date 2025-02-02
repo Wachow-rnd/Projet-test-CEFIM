@@ -1,0 +1,340 @@
+/**
+ * Reset
+ */
+ * {
+    margin: 0;
+    padding: 0;
+    /* width: 100%;
+    height: 100%; */
+    /* box-sizing: border-box; */
+}
+
+/**
+ * Eléments génériques
+ */
+
+/* body {
+    --color-primary: #f76c5e;
+    --color-secondary: #f68e5f;
+    --color-tertiary: #ffeee6;    
+} */
+
+/* Mise en forme des titres */
+h1 {
+    margin: 10px;
+    font-size: 100px;
+    font-weight: 900;
+    color: #f76c5e;
+}
+
+h2 {
+    position: inherit;
+    margin: 10px;
+    font-size: 60px;
+    font-weight: 600;
+    color: whitesmoke ;
+}
+
+#titrePresentation
+{
+    position: inherit;
+    padding: 0px 10px;
+    width: 100%;
+    /* height: 33%; */
+}
+.boutonDemarrer
+{
+    display: inline-block;
+    padding: 10px 20px;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    color: whitesmoke;
+    text-decoration: none;
+    border-radius: 10px;
+    text-align: center;   
+    background-color: #f68e5f;
+    width: 30%;
+}
+
+.boutonDemarrer:hover {
+    background-color: whitesmoke;
+    color: #f68e5f;
+    }
+
+h3 {
+    position: inherit;
+    margin: 10px;
+    font-size: 17px;
+    font-weight: 500;
+    color: whitesmoke;
+}
+
+/**
+ * Eléments principaux
+ */
+body {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; */
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif; 
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    /* justify-items: center; */
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+    font-weight: 600;
+    font-size: 17px;
+    color: white;
+    background-color:#f68e5f;
+}
+.margeHaute {
+    margin-top: 30px;
+}
+
+.margeBasse{
+    margin-bottom: 30px;
+}
+
+/**
+ * Mise en forme des éléments de la zone principale
+ */
+
+
+.ZonePresentation {
+    position: relative;
+    display: flex;
+    flex-direction:column ;
+    align-items: center;
+    justify-content: space-evenly;
+    justify-items: center;
+    text-align: center;
+    color: white;
+    width: 70vw;
+    height: 60vh;
+    background-color: rgb(30, 65, 97);
+    border-radius: 20px;
+    margin: 30px;    
+    
+}
+
+.ZoneQuiz {
+    position: relative;
+    display: flex;
+    flex-direction:column ;
+    flex-wrap:nowrap;
+    align-items: center;
+    justify-content: space-between;
+    justify-items: center;
+    text-align: center;
+    color: white;
+    width: 70vw;
+    height: 70%;
+    background-color: rgb(30, 65, 97);
+    border-radius: 20px;
+    margin: 30px;    
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fadeIn {
+    opacity: 0; /* Valeur initiale opacité de la page */
+	animation: fadeIn 3s ease-in-out; /* temps réglable en secondes, pour une demi-seconde mettre 0.5s */
+	opacity: 1;
+}
+
+
+.zoneAfficheTimer{
+    position: absolute;
+    top: 80px;
+    right: 100px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: black;
+    border: 2px;
+    background-color: white;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    color: #f76c5e;
+    justify-content: center;
+    font-weight: 600;
+}
+.zoneTheme {
+    position: inherit;
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    border-style: hidden;
+    width:100% ;
+}
+.zoneQuestions {
+    position: inherit;
+    margin-bottom: 50px;
+    height: 20%;
+}
+
+.zoneResultat {
+    
+    color: red;
+    font-size: x-large;
+    font-weight: 600;
+    justify-content: center;
+    height: 70vh;
+    
+}
+#afficherResultat{
+    position: inherit;
+    margin-bottom: 20px;
+    color: red;
+    height: 15%;
+}
+/* .blocReponses {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80%;
+} */
+
+.zoneReponses {
+    position: inherit;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* grid-auto-rows: 100px; */
+    gap: 20px;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+    }
+.zoneReponses input {
+    position: inherit;
+    margin-left: 20px;
+    height: 50%;
+    }
+.reponse {
+    position: inherit;
+    padding: 20px;
+    display: flex;
+    border-radius: 20px;
+    background-color: #f68e5f;
+    color: azure;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 1fr;
+
+}
+
+#validerReponse {
+    position: inherit;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    justify-items: center;
+    background-color: #f68e5f;
+    width: 100px;
+    height: 40px;
+    color: whitesmoke;
+}
+
+/** 
+ * Responsive
+ */
+
+
+ /* En dessous de 1200 px */
+@media screen and (max-width: 1200px) {
+    main {
+        width: 60%;
+        height: 90%;
+        padding: 30px;
+    }
+    .ZonePresentation {
+        height: auto;
+    }
+    .zoneAfficheTimer {
+        top:30px;
+        right:30px;
+        width: 70px;
+        height: 70px;
+    }
+}
+
+
+/* En dessous de 800 px */
+@media screen and (max-width: 800px) {
+    main {
+        width: 90%;
+        height: 90%;
+        padding: 10px;
+    }
+    footer {
+        position: sticky;
+        bottom: 0;
+    }
+    .ZonePresentation {
+        height: auto;
+    }
+    .zoneAfficheTimer {
+        top:10px;
+        right:10px;
+        width: 40px;
+        height: 40px;
+    }
+    .zoneReponses {
+        
+        margin-left: 10px;
+        margin-bottom: 10px;
+        
+        grid-template-columns: 1fr 1fr;
+        /* grid-auto-rows: 100px; */
+        gap: 5px;
+        width: 100%;        
+        }
+        .reponse {
+         
+            padding: 5px;
+            width: 50%;
+            height: 1fr;
+        
+        }    
+}

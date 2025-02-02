@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz CEFIM</title>
+    <!-- Inclusion du fichier css pour le style du quiz -->
+    <link rel="stylesheet" href="style/style.css">
+
+    <!-- Inclusion des 3 scripts nécessaires pour faire fonctionner le quiz -->
+    <script src="scripts/config.js" defer></script>
+    <script src="scripts/script.js" defer></script>
+    
+</head>
+<body>
+    <!-- En-tête -->
+    <header>
+        <h1>Quiz</h1>
+    </header>
+    <main>
+    <div class="ZoneQuiz">
+        <!-- Création du cercle où est affiché le timer -->
+        <div class="zoneAfficheTimer">
+            <!-- Affichage du timer -->
+            <span id="afficheTimer"></span>
+        </div>
+        <!-- Zone où sera affiché le thème -->
+        <div class="zoneTheme">
+        <!-- Utilisation d'un span pour intégrer d'éventuels futurs thèmes-->
+            <h2 id="titrePresentation">Thème: <span id="theme">Sport</span></h2>
+        </div>
+        <!-- Création de la zone où sera affichée la question en cours -->
+        <div class="zoneQuestions">
+            Question n°<span id="numQuestion">1</span><br><br>
+            <span id="question">?</span>
+        </div>
+        <!-- Création de la zone où seront affichées les questions -->
+        <div class="zoneReponses">
+        <!-- On utilise des input de type radio pour sélectionner son choix-->
+        <!-- Utilisation de span pour intégrer les réponses de la matrice listeReponses -->
+            <div class="reponse">
+                <span id="zoneReponse-1"></span>
+                <input type="radio" name="reponse" id="reponse-1" value="1">
+            </div>
+            <div  class="reponse">
+                <span id="zoneReponse-2"></span>
+                <input type="radio" name="reponse" id="reponse-2" value="2">
+            </div> 
+            <div  class="reponse">
+                <span id="zoneReponse-3"></span>
+                <input type="radio" name="reponse" id="reponse-3" value="3">
+            </div>
+            <div class="reponse">
+                <span id="zoneReponse-4"></span>
+                <input type="radio" name="reponse" id="reponse-4" value="4">
+            </div>
+            
+        </div>
+        <span id="afficherResultat"></span>
+        <button id="validerReponse">Valider</button>     
+    
+    
+    </div>
+    </main>
+    <!-- Pied de page -->
+    <footer>
+        Quiz de test pour le CEFIM
+    </footer>
+
+       
+</body>
+</html>
