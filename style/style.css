@@ -13,11 +13,9 @@
  * Eléments génériques
  */
 
-/* body {
-    --color-primary: #f76c5e;
-    --color-secondary: #f68e5f;
-    --color-tertiary: #ffeee6;    
-} */
+body {
+    min-height: 100vh;   
+}
 
 /* Mise en forme des titres */
 h1 {
@@ -305,13 +303,24 @@ footer {
     main {
         width: 90%;
         height: 90%;
-        padding: 10px;
+        /* padding: 10px; */
     }
+
+    h1{
+        font-size: 60px;
+    }
+
+    h2{
+        font-size: 40px;
+    }
+
     footer {
-        position: sticky;
+        position: fixed;
+        padding: 10px;
         bottom: 0;
+        left: 0;
     }
-    .ZonePresentation {
+    .ZonePresentation .ZoneQuiz{
         height: auto;
     }
     .zoneAfficheTimer {
@@ -330,11 +339,11 @@ footer {
         gap: 5px;
         width: 100%;        
         }
-        .reponse {
+    .reponse {
          
             padding: 5px;
-            width: 50%;
-            height: 1fr;
+            width: 80%;
+            height: 50px;
         
         }    
 }
