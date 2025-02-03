@@ -339,9 +339,7 @@ footer {
         
         margin-left: 10px;
         margin-bottom: 10px;
-        
         grid-template-columns: 1fr 1fr;
-        /* grid-auto-rows: 100px; */
         gap: 5px;
         width: 100%;        
         }
