@@ -214,7 +214,7 @@ footer {
 .zoneResultat {
     
     color: red;
-    font-size: 100px;
+    font-size: xx-large;
     font-weight: 600;
     justify-content: center;
     height: 50vh;
@@ -246,6 +246,7 @@ footer {
     width: 100%;
     justify-items: center;
     align-items: center;
+    padding: 2px;
     }
 .zoneReponses input {
     position: inherit;
