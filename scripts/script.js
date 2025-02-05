@@ -35,22 +35,67 @@ zoneNumQuestion.innerText=` ${numQuestion+1}`
 
 // Afficher le résultat à la fin du quiz @param:score
 function AfficherResultat(score) {
-    let zoneResultat= document.querySelector(".ZoneQuiz");
+    let spanScore=document.getElementById("spanScore");
+    let spanMessagePerso= document.getElementById("spanMessagePerso");
+    let zoneQuiz= document.querySelector(".ZoneQuiz");
+    
+    let zoneScoreFinal=document.querySelector(".zoneScoreFinal");
+    let inputPseudo= document.getElementById("inputPseudo");
+    console.log(inputPseudo);
+    afficherScoreTableau();
+    inputPseudo.addEventListener("keydown",(event)=>{
+        if(event.key === "Enter"){
+            event.preventDefault();
+            let nouveauScore = {pseudo : inputPseudo.value, score: score}
+            tableNomScore.push(nouveauScore)
+           
+            tableNomScore=afficherScoreTableau();
+            inputPseudo.disabled="true";
+            localStorage.setItem("tableNomOrdonnee", JSON.stringify(tableNomScore));
+        }
+        
+    })
+    zoneQuiz.classList.add("cacher");
     // Définition du message perso par défaut
     let messagePerso="Excellent, on voit le connaisseur!"
     // En fonction du résultat mettre un message personnalisé
+    // Si le score est 0 ou 1:
     if (score<2) {
         messagePerso="Dommage, le thème était assez difficile!"
     } else {
+        // si le score est 2 ou 3:
         if(score<4){
             messagePerso="Pas mal du tout!"
         }
     }
-    
-    zoneResultat.classList.add("zoneResultat")
+    // zoneResultat.classList.add("zoneResultat");
+    zoneScoreFinal.classList.add("afficher");
     // Vidage du contenu de la zone quiz pour afficher le résultat avec le message personnalisé
-    zoneResultat.innerHTML=`Votre score est de ${score} / ${listeQuestions.length}<br><br>
-    ${messagePerso}`
+    // zoneResultat.innerHTML=`Votre score est de ${score} / ${listeQuestions.length}<br><br>
+    // ${messagePerso}`
+    spanScore.innerText=` ${score} / ${listeQuestions.length}`
+    spanMessagePerso.innerText=`${messagePerso}`
+  
+}
+// fonction pour afficher le pseudo saisi et son score dans le bon ordre
+function afficherScoreTableau() {
+    console.log(tableNomScore);
+    let tableau= document.getElementById("tableauScore");
+    tableNomOrdonnee=Array.from(tableNomScore);
+    tableNomOrdonnee.sort((a,b) => b.score-a.score);
+    // garde seulement les 5 premiers éléments
+    tableNomScore = tableNomScore.slice(0,5);
+    console.log(tableNomScore);
+    // vider le corps du tableau des scores
+    tableau.innerHTML="";
+    for(let i = 0; i<Math.min(5,tableNomOrdonnee.length); i++) {
+        let score = tableNomOrdonnee[i];
+        tableau.innerHTML+= `<tr>
+        <td>${score.pseudo}</td>
+        <td>${score.score}</td>
+        </tr>`
+    };
+    return tableNomOrdonnee;
 }
 
 // Afficher tout le contenu de la zone des questions
@@ -118,6 +163,20 @@ function AfficherTimer(nbSecondes){
     }, 1000);
 
 }
+let tableNomScore=window.localStorage.getItem("tableNomOrdonnee");
+console.log(tableNomScore);
+
+if (tableNomScore === null) {
+    tableNomScore = [{pseudo: "Mario", score: 1},
+        {pseudo: "Luigi", score: 0},
+        {pseudo: "Peach", score: 2},
+        {pseudo: "Toad", score: 1},
+        {pseudo: "Bowser", score: 0},
+    ];
+} else {
+    tableNomScore = JSON.parse(tableNomScore);
+}
+console.log(tableNomScore[0].length);
 // Définition de la durée du timer
 let nbSecondes = 15;
 // Se positionner à la première question
