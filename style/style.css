@@ -280,6 +280,14 @@ footer {
     color: whitesmoke;
 }
 
+.zoneTableau {
+	position: absolute;
+	top: 100px;
+	left: 500px;
+	border-radius: 10px;
+	
+}
+
 /** 
  * Responsive
  */
