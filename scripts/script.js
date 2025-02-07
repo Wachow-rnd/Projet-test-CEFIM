@@ -7,6 +7,7 @@
 
 // Afficher la question @param : question
 function AfficherQuestion(question) {
+    // récupération de la zone d'affichage de la question
     let questionAffiche = document.getElementById("question")
     console.log(question)
 questionAffiche.innerText=`${question} ?`
@@ -14,7 +15,7 @@ questionAffiche.innerText=`${question} ?`
 
 // Afficher les réponses de la matrice listeReponses @param : numQuestion
 function AfficherReponses (numQuestion) {
-        // On parcours toutes les réponse de la question en cours
+        // On parcours toutes les réponses de la question en cours
         for (let i=0; i<listeReponses[numQuestion].length; i++) {
         let inputRep= document.getElementById(`zoneReponse-${i+1}`);
         console.log(inputRep)
@@ -23,6 +24,11 @@ function AfficherReponses (numQuestion) {
         // Affichage de la réponse depuis la matrice
         inputRep.innerText=listeReponses[numQuestion][i]
         }
+}
+
+function AfficherTheme(numTheme) {
+    let zoneTheme = document.getElementById("theme");
+    zoneTheme.innerText = listeThemes[numTheme];
 }
 
 // Afficher le numéro de la question en cours
@@ -35,26 +41,40 @@ zoneNumQuestion.innerText=` ${numQuestion+1}`
 
 // Afficher le résultat à la fin du quiz @param:score
 function AfficherResultat(score) {
+    console.log(score);
+    // récupération de la zone d'affichage du score
     let spanScore=document.getElementById("spanScore");
+    // récupération de la zone d'affichage du message personnalisé 
     let spanMessagePerso= document.getElementById("spanMessagePerso");
+    // récupération de la zone d'affichage du quiz
     let zoneQuiz= document.querySelector(".ZoneQuiz");
-    
+    // récupération de la zone d'affichage final du score    
     let zoneScoreFinal=document.querySelector(".zoneScoreFinal");
+    // récupération de l'input pseudo
     let inputPseudo= document.getElementById("inputPseudo");
     console.log(inputPseudo);
     afficherScoreTableau();
+    // vérification de l'evenement appui de la touche entrée sur l'inputPseudo
     inputPseudo.addEventListener("keydown",(event)=>{
         if(event.key === "Enter"){
+            // empecher le comportement par défaut de l'appui de la touche entrée
             event.preventDefault();
+            // sauvegarde du pseudo associé avec le score
             let nouveauScore = {pseudo : inputPseudo.value, score: score}
             tableNomScore.push(nouveauScore)
-           
+            // affichage du tableau des scores et récupérations de la liste ordonnée des scores et pseudos
             tableNomScore=afficherScoreTableau();
+            // désactivation de l'entrée du pseudo
             inputPseudo.disabled="true";
+            // sauvegarde dans le localstorage des données du tableau
             localStorage.setItem("tableNomOrdonnee", JSON.stringify(tableNomScore));
+        };
+        if(event.key === "Escape") {
+            localStorage.clear();
+            inputPseudo.disabled="true";  
         }
         
-    })
+    });
     zoneQuiz.classList.add("cacher");
     // Définition du message perso par défaut
     let messagePerso="Excellent, on voit le connaisseur!"
@@ -66,6 +86,10 @@ function AfficherResultat(score) {
         // si le score est 2 ou 3:
         if(score<4){
             messagePerso="Pas mal du tout!"
+        } else {
+            if (score == 6){
+                messagePerso = "Ouhlà! Carton plein!"
+            }
         }
     }
     // zoneResultat.classList.add("zoneResultat");
@@ -80,15 +104,19 @@ function AfficherResultat(score) {
 // fonction pour afficher le pseudo saisi et son score dans le bon ordre
 function afficherScoreTableau() {
     console.log(tableNomScore);
+    // selection du corps du tableau
     let tableau= document.getElementById("tableauScore");
+    // copie de la table des pseudo et scores
     tableNomOrdonnee=Array.from(tableNomScore);
+    // classe par ordre décroissant en fonction des scores
     tableNomOrdonnee.sort((a,b) => b.score-a.score);
     // garde seulement les 5 premiers éléments
-    tableNomScore = tableNomScore.slice(0,5);
-    console.log(tableNomScore);
+    tableNomOrdonnee = tableNomOrdonnee.slice(0,5);
+    console.log(tableNomOrdonnee);
     // vider le corps du tableau des scores
     tableau.innerHTML="";
-    for(let i = 0; i<Math.min(5,tableNomOrdonnee.length); i++) {
+    // construction du corps du tableau avec les données
+    for(let i = 0; i<tableNomOrdonnee.length; i++) {
         let score = tableNomOrdonnee[i];
         tableau.innerHTML+= `<tr>
         <td>${score.pseudo}</td>
@@ -104,8 +132,9 @@ function AfficherZoneQuestion(){
     AfficherResultatAttendu("")
     // Afficher uniquement s'il y a encore une question disponible 
     if(numQuestion<listeQuestions.length){
+        AfficherTheme(0);
         AfficherNumQuestion(numQuestion+1);
-        AfficherQuestion(listeQuestions[numQuestion])
+        AfficherQuestion(listeQuestions[numQuestion]);
         AfficherReponses(numQuestion);
         AfficherTimer(nbSecondes);
     } else {
@@ -163,6 +192,7 @@ function AfficherTimer(nbSecondes){
     }, 1000);
 
 }
+
 let tableNomScore=window.localStorage.getItem("tableNomOrdonnee");
 console.log(tableNomScore);
 
@@ -197,7 +227,7 @@ btnValiderReponse.addEventListener("click",() => {
     console.log(listeResultats[numQuestion])
     // Définition de la valeur cochée par défaut à 0
     let valeurCochee = 0
-    console.log(listeReponses[numQuestion][listeResultats[numQuestion]]);
+    console.log(listeReponses[numQuestion][listeResultats[numQuestion]-1]);
     for (let i=0;i<listeReponses[numQuestion].length;i++){
         let reponse = document.getElementById(`reponse-${i+1}`);
         
