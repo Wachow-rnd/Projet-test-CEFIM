@@ -9,23 +9,22 @@
 function AfficherQuestion(question) {
     // récupération de la zone d'affichage de la question
     let questionAffiche = document.getElementById("question")
-    console.log(question)
-questionAffiche.innerText=`${question} ?`
+questionAffiche.innerText = `${question} ?`
 }
 
 // Afficher les réponses de la matrice listeReponses @param : numQuestion
 function AfficherReponses (numQuestion) {
         // On parcours toutes les réponses de la question en cours
-        for (let i=0; i<listeReponses[numQuestion].length; i++) {
-        let inputRep= document.getElementById(`zoneReponse-${i+1}`);
-        console.log(inputRep)
+        for (let i = 0; i < listeReponses[numQuestion].length; i++) {
+        let inputRep = document.getElementById(`zoneReponse-${i+1}`);
         // Décocher les inputs
         document.getElementById(`reponse-${i+1}`).checked=false;
         // Affichage de la réponse depuis la matrice
-        inputRep.innerText=listeReponses[numQuestion][i]
+        inputRep.innerText = listeReponses[numQuestion][i]
         }
 }
 
+// Permet d'afficher le thème @param: numTheme
 function AfficherTheme(numTheme) {
     let zoneTheme = document.getElementById("theme");
     zoneTheme.innerText = listeThemes[numTheme];
@@ -34,25 +33,24 @@ function AfficherTheme(numTheme) {
 // Afficher le numéro de la question en cours
 function AfficherNumQuestion(){
 // Récupération du span où sera affiché le numéro
-let zoneNumQuestion= document.getElementById("numQuestion")
+let zoneNumQuestion = document.getElementById("numQuestion")
 // Affichage du numéro de la question en cours
-zoneNumQuestion.innerText=` ${numQuestion+1}`
+zoneNumQuestion.innerText =` ${numQuestion+1}`
 }
 
 // Afficher le résultat à la fin du quiz @param:score
 function AfficherResultat(score) {
-    console.log(score);
+    
     // récupération de la zone d'affichage du score
-    let spanScore=document.getElementById("spanScore");
+    let spanScore = document.getElementById("spanScore");
     // récupération de la zone d'affichage du message personnalisé 
-    let spanMessagePerso= document.getElementById("spanMessagePerso");
+    let spanMessagePerso = document.getElementById("spanMessagePerso");
     // récupération de la zone d'affichage du quiz
-    let zoneQuiz= document.querySelector(".ZoneQuiz");
+    let zoneQuiz = document.querySelector(".ZoneQuiz");
     // récupération de la zone d'affichage final du score    
-    let zoneScoreFinal=document.querySelector(".zoneScoreFinal");
+    let zoneScoreFinal = document.querySelector(".zoneScoreFinal");
     // récupération de l'input pseudo
     let inputPseudo= document.getElementById("inputPseudo");
-    console.log(inputPseudo);
     afficherScoreTableau();
     // vérification de l'evenement appui de la touche entrée sur l'inputPseudo
     inputPseudo.addEventListener("keydown",(event)=>{
@@ -69,6 +67,7 @@ function AfficherResultat(score) {
             // sauvegarde dans le localstorage des données du tableau
             localStorage.setItem("tableNomOrdonnee", JSON.stringify(tableNomScore));
         };
+        // fonction cachée pour vider le localStorage
         if(event.key === "Escape") {
             localStorage.clear();
             inputPseudo.disabled="true";  
@@ -92,18 +91,16 @@ function AfficherResultat(score) {
             }
         }
     }
-    // zoneResultat.classList.add("zoneResultat");
+    // afficher la zone d'affichage du score final
     zoneScoreFinal.classList.add("afficher");
-    // Vidage du contenu de la zone quiz pour afficher le résultat avec le message personnalisé
-    // zoneResultat.innerHTML=`Votre score est de ${score} / ${listeQuestions.length}<br><br>
-    // ${messagePerso}`
+    // afficher le score
     spanScore.innerText=` ${score} / ${listeQuestions.length}`
-    spanMessagePerso.innerText=`${messagePerso}`
-  
+    // afficher le message personnalisé
+    spanMessagePerso.innerText=`${messagePerso}`  
 }
+
 // fonction pour afficher le pseudo saisi et son score dans le bon ordre
 function afficherScoreTableau() {
-    console.log(tableNomScore);
     // selection du corps du tableau
     let tableau= document.getElementById("tableauScore");
     // copie de la table des pseudo et scores
@@ -112,7 +109,6 @@ function afficherScoreTableau() {
     tableNomOrdonnee.sort((a,b) => b.score-a.score);
     // garde seulement les 5 premiers éléments
     tableNomOrdonnee = tableNomOrdonnee.slice(0,5);
-    console.log(tableNomOrdonnee);
     // vider le corps du tableau des scores
     tableau.innerHTML="";
     // construction du corps du tableau avec les données
@@ -142,6 +138,7 @@ function AfficherZoneQuestion(){
         AfficherResultat(score)
     }
 }
+
 // Afficher la bonne réponse si le joueur a mal répondu
 function AfficherResultatAttendu (bonneReponse){
     // Permet d'afficher la bonne réponse en feedback
@@ -153,17 +150,17 @@ function AfficherResultatAttendu (bonneReponse){
 function stopTimer(timer) {
   clearInterval(timer);
 }
+
+// permet de basculer le bouton de validation de la réponse entre activé et désactivé
 function basculerBoutonValider(){
     // fonction pour activer ou désactiver le bouton de validation
     btnValiderReponse.toggleAttribute("disabled")
-  }  
-
+}  
+// Récupération du bouton de validation de la réponse
 let btnValiderReponse = document.getElementById("validerReponse");
-
-function AfficherTimer(nbSecondes){
-    
+// permet d'afficher le compte à rebours et l'arrêter s'il arrive à 0
+function AfficherTimer(nbSecondes){    
     let zoneAfficheTimer=document.getElementById("afficheTimer");
-    console.log(zoneAfficheTimer);
     // Utilisation de la fonction setInterval avec comme parametre 1000ms
     let timer = setInterval(() => {
         zoneAfficheTimer.innerText = `${nbSecondes} s`;
@@ -193,9 +190,9 @@ function AfficherTimer(nbSecondes){
 
 }
 
+// récupération des données du tableau depuis le localStorage
 let tableNomScore=window.localStorage.getItem("tableNomOrdonnee");
-console.log(tableNomScore);
-
+// s'il n'y a rien dedans définition d'une table par défaut
 if (tableNomScore === null) {
     tableNomScore = [{pseudo: "Mario", score: 1},
         {pseudo: "Luigi", score: 0},
@@ -204,9 +201,9 @@ if (tableNomScore === null) {
         {pseudo: "Bowser", score: 0},
     ];
 } else {
+    // sinon remise en forme des données du tableau
     tableNomScore = JSON.parse(tableNomScore);
 }
-console.log(tableNomScore[0].length);
 // Définition de la durée du timer
 let nbSecondes = 15;
 // Se positionner à la première question
@@ -218,55 +215,46 @@ AfficherZoneQuestion()
 // Ecouter le bouton de validation de la réponse
 let zoneQuiz = document.querySelector(".ZoneQuiz");
 btnValiderReponse.addEventListener("click",() => {
-    let reponse = document.getElementById(`reponse-${numQuestion+1}`);
     
     basculerBoutonValider();
     zoneQuiz.classList.remove("fadeIn");
-   
-    console.log(reponse)
-    console.log(listeResultats[numQuestion])
     // Définition de la valeur cochée par défaut à 0
-    let valeurCochee = 0
-    console.log(listeReponses[numQuestion][listeResultats[numQuestion]-1]);
+    let valeurCochee = 0;
+    
     for (let i=0;i<listeReponses[numQuestion].length;i++){
         let reponse = document.getElementById(`reponse-${i+1}`);
         
         if(reponse.checked){
             valeurCochee=reponse.value;
         }
-        
-    }
-    
+    };
+    // si la valeur cochee correspond à la bonne réponse alors afficher "bonne réponse"
     if (valeurCochee == listeResultats[numQuestion]){
-        score ++
+        score ++;
         
         AfficherResultatAttendu(`Bonne réponse!`);
         
     } else {
-        
+        // sinon afficher la réponse attendue
         AfficherResultatAttendu(`Mauvaise réponse! La bonne réponse était ${listeReponses[numQuestion][listeResultats[numQuestion]-1]}`);
         
-    }
-    console.log(score)
-    nbSecondes=15
+    };
     
-    numQuestion++
-    setTimeout(() => {
-        
+    nbSecondes=15;
+    // passer à la question suivante
+    numQuestion++;
+    // attendre 2s avant de passer à la question suivante pour avoir le temps de lire le feedback
+    setTimeout(() => {        
         if(numQuestion<listeQuestions.length){
+            // réactiver le bouton
             basculerBoutonValider();
+            // et  afficher la question suivante
             AfficherZoneQuestion();
+            // permettre l'effet d'Animation
             zoneQuiz.classList.add("fadeIn");
         } else {
-            AfficherResultat(score)
+            AfficherResultat(score);
         }
-    }, 2000);
-    
-    // document.querySelector(".ZoneQuiz").classList.add("opacité");
-    // setTimeout(()=>{
-    //     document.querySelector(".ZoneQuiz").classList.remove("opacité");
-    // },1000);
-    
-
+    }, 2000);//temps en ms
 })
 
